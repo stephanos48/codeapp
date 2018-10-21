@@ -1,8 +1,9 @@
 using System;
+using Microsoft.AspNetCore.Http;
 
-namespace codeapp.API.Models
+namespace codeapp.API.Dtos
 {
-    public class Photo
+    internal class PhotoForReturnDto
     {
 
         public int Id { get; set; }
@@ -16,10 +17,6 @@ namespace codeapp.API.Models
         public bool IsMain { get; set; }
 
         public string PublicId { get; set; }
-
-        public User User { get; set; }
-
-        public int UserId { get; set; }
 
     }
 }
