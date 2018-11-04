@@ -44,6 +44,11 @@ namespace codeapp.API.Data
             return user;
         }
 
+        public Task GetUser()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<IEnumerable<User>> GetUsers()
         {
             var users = await _context.Users.Include(p => p.Photos).ToListAsync();

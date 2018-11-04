@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using codeapp.API.Data;
 using codeapp.API.Dtos;
+using codeapp.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace codeapp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -34,7 +36,7 @@ namespace codeapp.API.Controllers
             return Ok(usersToReturn);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _repo.GetUser(id);
@@ -43,6 +45,7 @@ namespace codeapp.API.Controllers
 
             return Ok(userToReturn);
         }
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
