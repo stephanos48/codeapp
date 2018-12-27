@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using codeapp.API.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace codeapp.API.Data
 
@@ -16,6 +17,8 @@ namespace codeapp.API.Data
 
         public void SeedUsers()
         {
+            if (!_context.Users.Any())
+            {
             var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
             foreach (var user in users) 
@@ -31,6 +34,7 @@ namespace codeapp.API.Data
             }
 
             _context.SaveChanges();
+            }
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
