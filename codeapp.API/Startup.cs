@@ -90,6 +90,7 @@ namespace codeapp.API
                     opt.SerializerSettings.ReferenceLoopHandling = 
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+                
             services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();    
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
@@ -152,7 +153,7 @@ namespace codeapp.API
             });
 
             // app.UseHttpsRedirection();
-            // seeder.SeedUsers();
+            seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseAuthentication();
             app.UseDefaultFiles(); // added at build

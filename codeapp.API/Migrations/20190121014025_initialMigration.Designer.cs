@@ -10,7 +10,7 @@ using codeapp.API.Data;
 namespace codeapp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190114021409_initialMigration")]
+    [Migration("20190121014025_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
