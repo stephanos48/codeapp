@@ -34,6 +34,13 @@ namespace codeapp.API.Helpers
                     .MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(m => m.RecipientPhotoUrl, opt => opt
                     .MapFrom(u => u.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
+            CreateMap<CustomerForCreationDto, Customer>();
+            CreateMap<CustomerForReturnDto, Customer>().ReverseMap();
+            CreateMap<CustomerForUpdateDto, Customer>();
+            CreateMap<ScrumForCreationDto, Scrum>();
+            CreateMap<ScrumForReturnDto, Scrum>().ReverseMap();
+            CreateMap<ScrumForUpdateDto, Scrum>();
+            CreateMap<ResponsibleForReturnDto, Responsible>().ReverseMap();
         }
     }
 }

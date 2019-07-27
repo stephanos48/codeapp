@@ -1,0 +1,42 @@
+<form #createForm="ngForm" (ngSubmit)="create()">
+  <h2 class="text-center text-primary"> Create a new Scrum</h2>
+  <hr>
+
+  <div class="form-group">
+    <select type="text" class="form-control" required name="createdby" [(ngModel)]="model.createdBy" placeholder="Createdby">
+      <option value="1">Stephen English</option>
+      <option value="2">Brian Spencer</option>
+      <option value="3">Ron Drake</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+      <select name="responsibleId" #ResponsibleId="ngModel" [(ngModel)]="model.responsibleId" class="form-control">
+        <option *ngFor="let responsible of responsibleList" value="{{responsible.responsibleId}}">{{responsible.employeeName}}</option>
+      </select>
+  </div>
+
+  <!--
+  <div class="form-group">
+    <input type="text" class="form-control" required name="datecreated" [(ngModel)]="model.datecreated" placeholder="dateCreated" bsDatepicker [bsConfig]="bsConfig">
+  </div>
+  -->
+  
+  <div class="form-group">
+    <input type="text" class="form-control" required name="action" [(ngModel)]="model.action" placeholder="Action">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" required name="duedate" [(ngModel)]="model.duedate" placeholder="Duedate" bsDatepicker [bsConfig]="bsConfig">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" required name="notes" [(ngModel)]="model.notes" placeholder="Notes">
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" type="submit">Create</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+</form>

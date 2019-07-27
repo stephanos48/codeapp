@@ -1,0 +1,125 @@
+<div *ngIf="!createMode" class="container mt-5">
+    <div class="" style="text-align: left">
+        <button class="btn btn-primary btn-md" (click)="createToggle()">Create</button>
+    </div>
+    <br>
+<div class="row">
+  <table class="table">
+    <tr>
+      <th style="width: 15%">Customer ID</th>
+      <th style="width: 20%">Customer Name</th>
+      <th style="width: 20%">Product</th>
+      <th style="width: 20%">Country</th>
+      <th style="width: 20%">Notes</th>
+      <th style="width: 5%"></th>
+    </tr>
+    <tr *ngFor="let customer of customers">
+      <td>{{customer.customerId}}</td>
+      <td>{{customer.customerName}}</td>
+      <td>{{customer.product}}</td>
+      <td>{{customer.country}}</td>
+      <td>{{customer.notes}}</td>
+      <td><button class="btn btn-info" >Edit</button></td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="createMode" class="container">
+  <div>
+      <form [formGroup]="createCustomerForm" (ngSubmit)="createCustomer()">
+          <h2 class="text-center text-primary">Add a Customer</h2>
+          <hr>
+            
+          <div class="form-group">
+            <input type="text"
+              [ngClass]="{'is-invalid': createCustomerForm.get('customerName').errors
+                && createForm.get('customerName').touched}"
+                class="form-control"
+                formControlName="customername"
+                placeholder="Customername">
+            <div class="invalid-feedback">Please enter customer name</div>
+          </div>
+        
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': createForm.get('product').errors && createForm.get('product').touched}" class="form-control"
+              placeholder="Product" formControlName="product">
+          <div class="invalid-feedback" *ngIf="createForm.get('product').touched && createForm.get('product').hasError('required')">product is required</div>
+          </div>
+          
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': createForm.get('dateCreated').errors && createForm.get('dateCreated').touched}" class="form-control"
+              placeholder="Date Created" formControlName="dateCreated" type="text" bsDatepicker [bsConfig]="bsConfig">
+          <div class="invalid-feedback" *ngIf="createForm.get('dateCreated').touched && createForm.get('dateCreated').hasError('required')">Date Created is required</div>
+          </div>
+      
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': createForm.get('city').errors && createForm.get('city').touched}" class="form-control"
+              placeholder="City" formControlName="city">
+            <div class="invalid-feedback" *ngIf="createForm.get('city').touched && createForm.get('city').hasError('required')">City is required</div>
+          </div>
+        
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': createForm.get('country').errors && createForm.get('country').touched}" class="form-control"
+              placeholder="Country" formControlName="country">
+            <div class="invalid-feedback" *ngIf="createForm.get('country').touched && createForm.get('country').hasError('required')">Country is required</div>
+          </div>
+        
+          <div class="form-group">
+            <input type="password" 
+              [ngClass]="{'is-invalid': createForm.get('password').errors 
+                && createForm.get('password').touched}"
+                class="form-control" 
+                formControlName="password" 
+                placeholder="Password">
+            <div class="invalid-feedback"
+              *ngIf="createForm.get('password').hasError('required')
+                && createForm.get('password').touched">
+              Password is required
+            </div>
+      
+            <div class="invalid-feedback"
+              *ngIf="createForm.get('password').hasError('minlength')
+              && createForm.get('password').touched">
+              Password must be at least 4 characters
+            </div>
+            <div class="invalid-feedback"
+              *ngIf="createForm.get('password').hasError('mexlength')
+              && createForm.get('password').touched">
+              Password cannot exceed 8 characters
+            </div>
+          </div>
+      
+          <div class="form-group">
+              <input type="password" 
+                [ngClass]="{'is-invalid': createForm.get('confirmPassword').errors 
+                  && createForm.get('confirmPassword').touched
+                  || createForm.get('confirmPassword').touched
+                  && createForm.hasError('mismatch')}"
+                  class="form-control" 
+                  formControlName="confirmPassword" 
+                  placeholder="Confirm Password">
+              <div class="invalid-feedback"
+              *ngIf="createForm.get('confirmPassword').hasError('required')
+                && createForm.get('confirmPassword').touched">
+                Password is required
+              </div>
+              <div class="invalid-feedback"
+              *ngIf="createForm.hasError('mismatch')
+                && createForm.get('confirmPassword').touched">
+                Password must match
+              </div>
+          </div>
+        
+          <div class="form-group text-center">
+            <button class="btn btn-success" [disabled]="!createForm.valid" type="submit">Create</button>
+            <button class="btn btn-default" type="button" (click)="cancel()" >Cancel</button>
+          </div>
+          
+        </form>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <app-customer (cancelCreate)="cancelCreateMode($event)"></app-customer>
+    </div>
+  </div>
+  </div>
+  </div>

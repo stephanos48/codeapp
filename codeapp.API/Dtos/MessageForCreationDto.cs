@@ -8,13 +8,13 @@ namespace codeapp.API.Dtos
 
         public int RecipientId { get; set; }
 
-        public DateTime MesssageSent { get; set; }
+        public DateTime MessageSent { get; set; }
 
         public string Content { get; set; }
 
         public MessageForCreationDto()
         {
-            MesssageSent = DateTime.Now;
+            MessageSent = DateTime.Now;
         }
     }
 }

@@ -23,5 +23,4 @@ export class RolesModalComponent implements OnInit {
     this.bsModalRef.hide();
   }
 
-
 }

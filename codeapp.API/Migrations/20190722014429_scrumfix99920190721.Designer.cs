@@ -10,16 +10,53 @@ using codeapp.API.Data;
 namespace codeapp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190121014025_initialMigration")]
-    partial class initialMigration
+    [Migration("20190722014429_scrumfix99920190721")]
+    partial class scrumfix99920190721
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
+                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("codeapp.API.Models.Customer", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("AnnualRevenue");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("CompanyStart");
+
+                    b.Property<string>("Country");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("CustomerName");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("PhoneNo");
+
+                    b.Property<string>("Product");
+
+                    b.Property<bool>("Union");
+
+                    b.Property<string>("Website");
+
+                    b.HasKey("CustomerId");
+
+                    b.ToTable("Customers");
+                });
 
             modelBuilder.Entity("codeapp.API.Models.Like", b =>
                 {
@@ -92,6 +129,23 @@ namespace codeapp.API.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("codeapp.API.Models.Responsible", b =>
+                {
+                    b.Property<int>("ResponsibleId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EmployeeName");
+
+                    b.Property<string>("EmployeeTitle");
+
+                    b.Property<string>("Notes");
+
+                    b.HasKey("ResponsibleId");
+
+                    b.ToTable("Responsibles");
+                });
+
             modelBuilder.Entity("codeapp.API.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -115,6 +169,33 @@ namespace codeapp.API.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Scrum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Action");
+
+                    b.Property<DateTime>("CompletionDate");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<DateTime>("DueDate");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int>("ResponsibleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResponsibleId");
+
+                    b.ToTable("Scrums");
                 });
 
             modelBuilder.Entity("codeapp.API.Models.User", b =>
@@ -316,6 +397,14 @@ namespace codeapp.API.Migrations
                     b.HasOne("codeapp.API.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Scrum", b =>
+                {
+                    b.HasOne("codeapp.API.Models.Responsible", "Responsible")
+                        .WithMany("Scrums")
+                        .HasForeignKey("ResponsibleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

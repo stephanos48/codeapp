@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="col-sm-8">
+    <div class="tab-panel">
+      <tabset class="customer-tabset">
+        <tab heading="Edit Customer">
+          <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCustomer()">
+            <h4>Customer Name</h4>
+            <textarea name="customerName" rows="1" class="form-control"
+            [(ngModel)]="customer.customerName"></textarea>
+            <h4>Product</h4>
+            <textarea name="product" rows="1" class="form-control"
+            [(ngModel)]="customer.product"></textarea>
+            <h4>City</h4>
+            <textarea name="city" rows="1" class="form-control"
+            [(ngModel)]="customer.city"></textarea>
+            <h4>Country</h4>
+            <textarea name="country" rows="1" class="form-control"
+            [(ngModel)]="customer.country"></textarea>
+          </form>
+        </tab>
+        <tab heading="Mookie">
+          <p></p>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+  <div class="footer">
+    <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+  </div>
+</div>

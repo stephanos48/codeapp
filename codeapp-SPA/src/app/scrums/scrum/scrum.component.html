@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div *ngIf="!createMode">
+    <div style="text-align: left">
+    <button class="btn btn-primary btn-md"  (click)="createToggle()">Create</button>
+    </div>
+    <br>
+    <div class="row" style="text-align: left">
+      <table class="table">
+        <tr>
+          <th style="width: 5%">Scrum Id</th>
+          <th style="width: 15%">Created By</th>
+          <th style="width: 10%">Date Created</th>
+          <th style="width: 15%">Responsible</th>
+          <th style="width: 30%">Action</th>
+          <th style="width: 15%">Due Date</th>
+          <th style="width: 15%">Completion Date</th>
+          <th style="width: 20%">Notes</th>
+          <th style="width: 5%"></th>
+        </tr>
+        <tr *ngFor="let scrum of scrums">
+          <td>{{scrum.id}}</td>
+          <td>{{scrum.createdBy}}</td>
+          <td>{{scrum.dateCreated | date}}</td>
+          <td>{{scrum.responsible}}</td>
+          <td>{{scrum.action}}</td>
+          <td>{{scrum.dueDate | date}}</td>
+          <td>{{scrum.completionDate | date}}</td>
+          <td>{{scrum.notes}}</td>
+          <td><button class="btn btn-info" (click)="editScrumsModal(scrum)">Edit</button></td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="createMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-scrum-create (cancelCreate)="cancelCreateMode($event)"></app-scrum-create>
+      </div>
+    </div>
+  </div>
+</div>

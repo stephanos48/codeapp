@@ -21,6 +21,12 @@ namespace codeapp.API.Data
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Scrum> Scrums { get; set; }
+
+        public DbSet<Responsible> Responsibles { get; set; } 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -60,12 +66,17 @@ namespace codeapp.API.Data
                 .WithMany(u => u.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict); 
 
-
             builder.Entity<Message>()
                 .HasOne(u => u.Recipient)
                 .WithMany(u => u.MessagesReceived)
-                .OnDelete(DeleteBehavior.Restrict);   
+                .OnDelete(DeleteBehavior.Restrict);
 
+           /* builder.Entity<Scrum>()
+                .HasOne<Responsible>(g => g.CurrentResponsible)
+                .WithOne(b => b.Scrum)
+                .HasForeignKey<Scrum>(b => b.CurrentResponsibleId)
+                .OnDelete(DeleteBehavior.Restrict);
+            */
             builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);    
         }
     }

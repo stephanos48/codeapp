@@ -90,12 +90,10 @@ namespace codeapp.API.Controllers
 
             _repo.Add(message);
 
-
             if (await _repo.SaveAll()) {
                 var messageToRetun = _mapper.Map<MessageToReturnDto>(message);
                 return CreatedAtRoute("GetMessage", new {id = message.Id}, message);
             }
-
 
             throw new Exception("Creating the message failed on save"); 
         }

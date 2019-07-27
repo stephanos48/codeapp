@@ -17,7 +17,9 @@ export class MemberListComponent implements OnInit {
   userParams: any = {};
   pagination: Pagination;
 
-  constructor(private userService: UserService, private alertify: AlertifyService,
+  constructor(
+    private userService: UserService,
+    private alertify: AlertifyService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {

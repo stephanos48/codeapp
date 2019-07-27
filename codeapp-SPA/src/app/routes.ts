@@ -13,6 +13,13 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerListComponent } from './customerdoppel/customer-list/customer-list.component';
+import { CustomerEditComponent } from './customerdoppel/customer-edit/customer-edit.component';
+import { CustomerEditResolver } from './_resolvers/customer-edit.resolver';
+import { ScrumListComponent } from './scrums/scrum-list/scrum-list.component';
+import { ScrumComponent } from './scrums/scrum/scrum.component';
+import { PrimeComponent } from './prime/prime.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,6 +29,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
+            { path: 'prime', component: PrimeComponent, data: {}},
             { path: 'members/:id', component: MemberDetailComponent,
                 resolve: { user: MemberDetailResolver }},
             { path: 'member/edit', component: MemberEditComponent,
@@ -29,6 +37,12 @@ export const appRoutes: Routes = [
             { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver} },
             { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver} },
             { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']} },
+            { path: 'customer', component: CustomerComponent, data: {roles: ['Admin', 'Moderator']} },
+            { path: 'customerlist', component: CustomerListComponent, data: {roles: ['Admin', 'Moderator']} },
+            { path: 'customer/edit', component: CustomerEditComponent,
+            resolve: {customer: CustomerEditResolver}, canDeactivate: [PreventUnsavedChanges] },
+            { path: 'scrum', component: ScrumComponent, data: {roles: ['Admin', 'Moderator']} },
+            { path: 'scrumlist', component: ScrumListComponent, data: {roles: ['Admin', 'Moderator']} },
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

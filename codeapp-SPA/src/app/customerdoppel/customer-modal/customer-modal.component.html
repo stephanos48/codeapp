@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Edit Customer: {{customer?.customerName}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #customerForm="ngForm" id="customerForm">
+      <div class="form-group">
+        <input type="text" class="form-control" required name="customername" [(ngModel)]="customer.customerName" placeholder="Customername">
+      </div>
+      
+      <div class="form-group">
+        <input type="text" class="form-control" required name="product" [(ngModel)]="customer.product" placeholder="Product">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="city" [(ngModel)]="customer.city" placeholder="City">
+      </div>
+      
+      <div class="form-group">
+        <input type="text" class="form-control" required name="country" [(ngModel)]="customer.country" placeholder="Country">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="notes" [(ngModel)]="customer.notes" placeholder="Notes">
+      </div>
+
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-success" (click)="updateCustomer()" form="customerForm">Submit</button>
+</div>

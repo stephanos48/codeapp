@@ -136,6 +136,11 @@ namespace codeapp.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync()) > 0;
+        }
+
         public async Task<Message> GetMessage(int id)
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
@@ -180,5 +185,41 @@ namespace codeapp.API.Data
 
             return messages;
         }
+
+        public async Task<IEnumerable<Customer>> GetCustomers()
+        {
+            var customers = await _context.Customers.ToListAsync();
+            return customers;
+        }
+ 
+        public async Task<Customer> GetCustomer(int id)
+        {
+            var specificcustomer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
+            return specificcustomer;
+        }
+
+        public async Task<IEnumerable<Scrum>> GetScrums()
+        {
+            var scrums = await _context.Scrums.ToListAsync();
+            return scrums;
+        }
+ 
+        public async Task<Scrum> GetScrum(int id)
+        {
+            var specificscrum = await _context.Scrums.FirstOrDefaultAsync(m => m.Id == id);
+            return specificscrum;
+        }
+
+/*       public async Task<bool> UpdateScrumAsync(Scrum scrum){
+             _context.Update(scrum);
+             return true;
+        }*/
+        
+        public async Task<IEnumerable<Responsible>> GetResponsibles()
+        {
+            var responsibles = await _context.Responsibles.ToListAsync();
+            return responsibles;
+        }
+
     }
 }

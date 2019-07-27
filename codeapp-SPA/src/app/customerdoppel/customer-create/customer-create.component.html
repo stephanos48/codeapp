@@ -1,0 +1,33 @@
+<form #createForm="ngForm" (ngSubmit)="create()">
+  <h2 class="text-center text-primary"> Create a new Customer</h2>
+  <hr>
+
+  <div class="form-group">
+    <input type="text" class="form-control" required name="customername" [(ngModel)]="model.customername" placeholder="Customername">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" required name="product" [(ngModel)]="model.product" placeholder="Product">
+  </div>
+
+  <!--
+  <div class="form-group">
+    <input type="text" class="form-control" required name="datecreated" [(ngModel)]="model.datecreated" placeholder="dateCreated" bsDatepicker [bsConfig]="bsConfig">
+  </div>
+  -->
+  
+  <div class="form-group">
+    <input type="text" class="form-control" required name="city" [(ngModel)]="model.city" placeholder="City">
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" required name="country" [(ngModel)]="model.country" placeholder="Country">
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" [disabled]="!createForm.valid" type="submit">Create</button>
+    <button class="btn btn-default" type="button" (click)="cancel()" >Cancel</button>
+  </div>
+
+</form>
+

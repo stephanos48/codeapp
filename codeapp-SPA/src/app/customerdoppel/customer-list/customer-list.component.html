@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div *ngIf="!createMode">
+    <div style="text-align: left">
+    <button class="btn btn-primary btn-md"  (click)="createToggle()">Create</button>
+    </div>
+    <br>
+    <div class="row" style="text-align: left">
+      <table class="table" >
+        <tr>
+          <th style="width: 15%">Customer ID</th>
+          <th style="width: 20%">Customer Name</th>
+          <th style="width: 20%">Product</th>
+          <th style="width: 20%">Country</th>
+          <th style="width: 20%">Notes</th>
+          <th style="width: 5%"></th>
+        </tr>
+        <tr *ngFor="let customer of customers">
+          <td>{{customer.customerId}}</td>
+          <td>{{customer.customerName}}</td>
+          <td>{{customer.product}}</td>
+          <td>{{customer.country}}</td>
+          <td>{{customer.notes}}</td>
+          <td><button class="btn btn-info" (click)="editCustomersModal(customer)">Edit</button></td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="createMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-customer-create (cancelCreate)="cancelCreateMode($event)"></app-customer-create>
+      </div>
+    </div>
+  </div>
+</div>
+

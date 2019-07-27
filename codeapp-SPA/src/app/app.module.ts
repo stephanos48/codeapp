@@ -40,7 +40,19 @@ import { AdminService } from './_services/admin.service';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
-
+import { ValueComponent } from './value/value.component';
+import { GeneralService } from './_services/general.service';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerListComponent } from './customerdoppel/customer-list/customer-list.component';
+import { CustomerEditComponent } from './customerdoppel/customer-edit/customer-edit.component';
+import { CustomerCreateComponent } from './customerdoppel/customer-create/customer-create.component';
+import { CustomerModalComponent } from './customerdoppel/customer-modal/customer-modal.component';
+import { CustomerEditResolver } from './_resolvers/customer-edit.resolver';
+import { ScrumComponent } from './scrums/scrum/scrum.component';
+import { ScrumListComponent } from './scrums/scrum-list/scrum-list.component';
+import { ScrumCreateComponent } from './scrums/scrum-create/scrum-create.component';
+import { ScrumModalComponent } from './scrums/scrum-modal/scrum-modal.component';
+import { PrimeComponent } from './prime/prime.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -65,7 +77,18 @@ export function tokenGetter() {
       HasRoleDirective,
       UserManagementComponent,
       PhotoManagementComponent,
-      RolesModalComponent
+      RolesModalComponent,
+      ValueComponent,
+      CustomerComponent,
+      CustomerListComponent,
+      CustomerEditComponent,
+      CustomerCreateComponent,
+      CustomerModalComponent,
+      ScrumComponent,
+      ScrumListComponent,
+      ScrumCreateComponent,
+      ScrumModalComponent,
+      PrimeComponent
    ],
    imports: [
       BrowserModule,
@@ -77,16 +100,16 @@ export function tokenGetter() {
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
       ButtonsModule.forRoot(),
-      RouterModule.forRoot(appRoutes),
+      RouterModule.forRoot(appRoutes, {useHash: true}),
       ModalModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule,
       JwtModule.forRoot({
-          config: {
-              tokenGetter: tokenGetter,
-              whitelistedDomains: ['localhost:5000'],
-              blacklistedRoutes: ['localhost:5000/api/auth']
-          }
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
       })
    ],
    providers: [
@@ -102,11 +125,16 @@ export function tokenGetter() {
       PreventUnsavedChanges,
       ListsResolver,
       MessagesResolver,
-      AdminService
+      AdminService,
+      GeneralService,
+      CustomerEditResolver,
+
    ],
    entryComponents:
    [
-      RolesModalComponent
+      RolesModalComponent,
+      CustomerModalComponent,
+      ScrumModalComponent
    ],
    bootstrap: [
       AppComponent
