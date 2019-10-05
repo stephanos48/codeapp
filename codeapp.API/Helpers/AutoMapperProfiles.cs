@@ -14,14 +14,14 @@ namespace codeapp.API.Helpers
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })                
                 .ForMember(dest => dest.Age, opt => {
-                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+                    opt.MapFrom(d => d.DateOfBirth.CalculateAge());
             });
             CreateMap<User, UserForDetailedDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => {
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
                 .ForMember(dest => dest.Age, opt => {
-                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+                    opt.MapFrom(d => d.DateOfBirth.CalculateAge());
             });
             CreateMap<Photo, PhotosForDetailedDto>();
             CreateMap<UserForUpdateDto, User>();
@@ -39,8 +39,25 @@ namespace codeapp.API.Helpers
             CreateMap<CustomerForUpdateDto, Customer>();
             CreateMap<ScrumForCreationDto, Scrum>();
             CreateMap<ScrumForReturnDto, Scrum>().ReverseMap();
+            CreateMap<ScrumForListDto, Scrum>().ReverseMap();
             CreateMap<ScrumForUpdateDto, Scrum>();
             CreateMap<ResponsibleForReturnDto, Responsible>().ReverseMap();
+            CreateMap<AuditForCreationDto, Audit>();
+            CreateMap<AuditForReturnDto, Audit>().ReverseMap();
+            CreateMap<Audit, AuditForListDto>()
+                .ForMember(dest => dest.PhotoAuditUrl, opt => opt
+                    .MapFrom(src => src.PhotoAudits.FirstOrDefault(p => p.IsMain).Url));
+            CreateMap<Audit, AuditForDetailDto>()
+                .ForMember(dest => dest.PhotoAuditUrl, opt => opt
+                    .MapFrom(src => src.PhotoAudits.FirstOrDefault(p => p.IsMain).Url));  
+            CreateMap<PhotoAudit, PhotoAuditsForDetailedDto>();
+            CreateMap<PhotoAudit, PhotoAuditForReturnDto>();
+            CreateMap<PhotoAuditForCreationDto, PhotoAudit>();     
+            CreateMap<AuditForUpdateDto, Audit>();
+            CreateMap<FindingForCreationDto, Finding>();
+            CreateMap<FindingForReturnDto, Finding>().ReverseMap();
+            CreateMap<FindingForUpdateDto, Finding>();
+
         }
     }
 }

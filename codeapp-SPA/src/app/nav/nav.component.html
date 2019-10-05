@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
-      <a class="navbar-brand" [routerLink]="['/home']" >MLS Portal</a>
+      <a class="navbar-brand" [routerLink]="['/prime']" >MLS Portal</a>
 
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="router" >
-          <a class="nav-link" [routerLink]="['/members']" >Matches</a>
+          <a class="nav-link" [routerLink]="['/members']" >Colleagues</a>
         </li>
         <li class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/lists']" >Lists</a>
@@ -14,9 +14,6 @@
         </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/admin']">Admin</a>
-        </li>
-        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active" >
-          <a class="nav-link" [routerLink]="['/scrum']">Scrum</a>
         </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active" >
           <a class="nav-link" [routerLink]="['/customerlist']">Customer Test</a>

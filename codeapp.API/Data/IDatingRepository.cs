@@ -21,9 +21,20 @@ namespace codeapp.API.Data
          Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
          Task<IEnumerable<Customer>> GetCustomers();
          Task<Customer> GetCustomer(int id);
+         //Task<PagedList<Scrum>> GetScrums(ScrumParams scrumParams);
          Task<IEnumerable<Scrum>> GetScrums();
          Task<Scrum> GetScrum(int id);
+         Task<IEnumerable<Ncr>> GetNcrs();
+         Task<Ncr> GetNcr(int id);
          Task<IEnumerable<Responsible>> GetResponsibles();
+         Task<IEnumerable<Audit>> GetAudits();
+         Task<Audit> GetAudit(int id);
+         Task<IEnumerable<Finding>> GetFindings();
+         Task<Finding> GetFinding(int id);
+         Task<PhotoAudit> GetPhotoAudit(int id);
+         Task<IEnumerable<AuditType>> GetAuditTypes();
+        Task<IEnumerable<ScrumStatus>> GetScrumStatus();
+
          Task<bool> SaveChangesAsync();
          
          //Task<bool> UpdateScrumAsync(Scrum scrum);

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using codeapp.API.Data;
 using codeapp.API.Dtos;
+using codeapp.API.Helpers;
 using codeapp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +35,22 @@ namespace codeapp.API.Controllers
             return Ok(customers);
         }
         */
+        /* 
+        [HttpGet]
+        public async Task<IActionResult> GetScrums([FromQuery]ScrumParams scrumParams)
+        {
 
-        [HttpGet("getScrums")]
+            var scrums = await _repo.GetScrums(scrumParams);
+
+            var scrumsToReturn = _mapper.Map<IEnumerable<ScrumForListDto>>(scrums);
+
+            Response.AddPagination(scrums.CurrentPage, scrums.PageSize, 
+                scrums.TotalCount, scrums.TotalPages);
+
+            return Ok(scrumsToReturn);
+        }
+        */
+      [HttpGet("getScrums")]
         public async Task<IActionResult> GetScrums()
         {
 
@@ -43,12 +58,9 @@ namespace codeapp.API.Controllers
 
             var scrumsToReturn = _mapper.Map<IEnumerable<ScrumForReturnDto>>(scrums);
 
-        /* Response.AddPagination(customers.CurrentPage, customers.PageSize, 
-        customers.TotalCount, customers.TotalPages); */
-
             return Ok(scrumsToReturn);
         }
-        
+      
         [HttpGet("{id}", Name = "getScrum")]
         public async Task<IActionResult> GetScrum(int id)
         {

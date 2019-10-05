@@ -1,0 +1,85 @@
+<div class="container mt-4">
+    <div class="row">
+    <div class="col-11 text-left">
+      <h2>Internal Audit Details</h2>
+      <a class="nav-link" [routerLink]="['/internalaudit']"><h4><i class="fa fa-arrow-left"></i></h4></a>
+      <h3>Audit {{audit.auditNo}} Details</h3>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+  
+          <div class="card-body">
+  
+            <div class="card-footer">
+              <div class="btn-group d-flex">
+                <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="tab-panel">
+          <tabset class="audit-tabset" #auditTabs>
+            <tab heading="About {{audit?.auditNo}}">
+              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateAudit()">
+                <h4>Audit Number</h4>
+                <textarea name="auditno" rows="1" class="form-control"
+                [(ngModel)]="audit.auditNo"></textarea>
+                <h4>Audit Name</h4>
+                <textarea name="auditname" rows="1" class="form-control"
+                [(ngModel)]="audit.auditName"></textarea>
+                <h4>Audit Reason</h4>
+                <textarea name="auditreason" rows="2" class="form-control"
+                [(ngModel)]="audit.auditReason"></textarea>
+                <h4>Planned Audit Start Date</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control" required name="plannedauditstartdate" [(ngModel)]="audit.plannedAuditStartDate" placeholder="plannedAuditStartDate" bsDatepicker [bsConfig]="bsConfig">
+                </div>
+                <h4>Planned Audit End Date</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control" required name="plannedauditenddate" [(ngModel)]="audit.plannedAuditEndDate" placeholder="plannedAuditEndDate" bsDatepicker [bsConfig]="bsConfig">
+                </div>
+                <h4>Actual Audit Start Date</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control" required name="actualauditstartdate" [(ngModel)]="audit.actualAuditStartDate" placeholder="actualAuditStartDate" bsDatepicker [bsConfig]="bsConfig">
+                </div>
+                <h4>Actual Audit End Date</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control" required name="actualauditenddate" [(ngModel)]="audit.actualAuditEndDate" placeholder="actualAuditEndDate" bsDatepicker [bsConfig]="bsConfig">
+                </div>
+                <h4>Audit Type</h4>
+                <div class="form-group">
+                  <select name="auditTypeId" #AuditTypeId="ngModel" [(ngModel)]="audit.auditTypeId" class="form-control">
+                    <option *ngFor="let audittype of audittypeList" value="{{audittype.auditTypeId}}">{{audittype.auditTypeName}}</option>
+                  </select>
+                </div>
+                <h4>Audit Scope</h4>
+                <textarea name="auditscope" rows="2" class="form-control"
+                [(ngModel)]="audit.auditScope"></textarea>
+                <h4>Auditors</h4>
+                <textarea name="auditors" rows="2" class="form-control"
+                [(ngModel)]="audit.auditors"></textarea>
+                <h4>Summary</h4>
+                <textarea name="summary" rows="8" class="form-control"
+                [(ngModel)]="audit.auditSummary"></textarea>
+                <h4>Audit Notes</h4>
+                <textarea name="notes" rows="4" class="form-control"
+                [(ngModel)]="audit.notes"></textarea>
+              </form>
+            </tab>
+            <tab heading="Edit Photos">
+                <app-auditphoto-editor [photoaudits]="audit.photoaudits"
+                  (getAuditPhotoChange)="updateMainPhoto($event)"></app-auditphoto-editor>
+            </tab>
+            <tab heading="Findings">
+                
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>

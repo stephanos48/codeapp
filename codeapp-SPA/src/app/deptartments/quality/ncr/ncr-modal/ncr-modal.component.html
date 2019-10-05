@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Edit Scrum: {{ncr?.ncrId}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #scrumForm="ngForm" id="ncrForm">
+      
+      <div class="form-group">
+        <input type="text" class="form-control" required name="id" [readOnly]="true" [value]="ncr.ncrId" placeholder="Ncrid">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="datecreated" [readOnly]="true" [(ngModel)]="ncr.dateCreated" placeholder="Datecreated">
+      </div>
+      
+      <div class="form-group">
+        <input type="text" class="form-control" required name="ncrno" [(ngModel)]="ncr.ncrNo" placeholder="Ncrno">
+      </div>
+      
+      <div class="form-group">
+        <input type="text" class="form-control" required name="partnumber" [(ngModel)]="ncr.partNumber" placeholder="Partnumber">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="defectdescription" [(ngModel)]="ncr.defectDescription" placeholder="Defectdescription" >
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="ncrstatusid" [(ngModel)]="ncr.ncrStatusId" placeholder="Ncrstatusid" >
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="notes" [(ngModel)]="ncr.notes" placeholder="Notes">
+      </div>
+
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-success" (click)="updateNcr()" form="ncrForm">Submit</button>
+</div>
+

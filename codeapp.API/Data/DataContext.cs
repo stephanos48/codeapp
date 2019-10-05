@@ -23,9 +23,33 @@ namespace codeapp.API.Data
 
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<CustomerDivision> CustomerDivisions { get; set; }
+
         public DbSet<Scrum> Scrums { get; set; }
 
         public DbSet<Responsible> Responsibles { get; set; } 
+
+        public DbSet<Ncr> Ncrs { get; set; }
+
+        public DbSet<Disposition> Dispositions { get; set; }
+
+        public DbSet<NcrStatus> NcrStatuses { get; set; }
+
+        public DbSet<NcrType> NcrTypes { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
+
+        public DbSet<Audit> Audits { get; set; }
+
+        public DbSet<AuditType> AuditTypes { get; set; }
+
+        public DbSet<Finding> Findings { get; set; }
+
+        public DbSet<FindingType> FindingTypes { get; set; }
+
+        public DbSet<PhotoAudit> PhotoAudits { get; set; }
+
+        public DbSet<ScrumStatus> ScrumStatuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -71,13 +95,21 @@ namespace codeapp.API.Data
                 .WithMany(u => u.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Audit>()
+                .HasMany(a => a.Findings)
+                .WithOne(f => f.Audit)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
            /* builder.Entity<Scrum>()
                 .HasOne<Responsible>(g => g.CurrentResponsible)
                 .WithOne(b => b.Scrum)
                 .HasForeignKey<Scrum>(b => b.CurrentResponsibleId)
                 .OnDelete(DeleteBehavior.Restrict);
             */
-            builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);    
+            builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved); 
+
+            builder.Entity<PhotoAudit>().HasQueryFilter(p => p.IsApproved);   
         }
     }
 }

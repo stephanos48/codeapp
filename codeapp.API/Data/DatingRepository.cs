@@ -197,17 +197,67 @@ namespace codeapp.API.Data
             var specificcustomer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
             return specificcustomer;
         }
-
+        
         public async Task<IEnumerable<Scrum>> GetScrums()
         {
             var scrums = await _context.Scrums.ToListAsync();
             return scrums;
         }
- 
+        
+        /*
+        public async Task<PagedList<Scrum>> GetScrums(ScrumParams scrumParams)
+        {
+            var scrums = _context.Scrums.OrderByDescending(u => u.DateCreated).AsQueryable();
+
+            scrums = scrums.Where(u => u.Id != scrumParams.ScrumId);
+
+            scrums = scrums.Where(u => u.ScrumStatus == scrumParams.ScrumStatus);
+
+            return await PagedList<Scrum>.CreateAsync(scrums, scrumParams.PageNumber, scrumParams.PageSize);
+        }
+        */
         public async Task<Scrum> GetScrum(int id)
         {
             var specificscrum = await _context.Scrums.FirstOrDefaultAsync(m => m.Id == id);
             return specificscrum;
+        }
+
+        public async Task<IEnumerable<Ncr>> GetNcrs()
+        {
+            var ncrs = await _context.Ncrs.ToListAsync();
+            return ncrs;
+        } 
+
+        public async Task<Ncr> GetNcr(int id)
+        {
+            var specificncr = await _context.Ncrs.FirstOrDefaultAsync(m => m.NcrId == id);
+            return specificncr;
+        }
+
+        public async Task<IEnumerable<Audit>> GetAudits()
+        {
+            var audits = await _context.Audits
+                .OrderByDescending(m => m.PlannedAuditStartDate)
+                .ToListAsync();
+            return audits;
+        }
+ 
+        public async Task<Audit> GetAudit(int id)
+        {
+            var specificaudit = await _context.Audits.FirstOrDefaultAsync(m => m.AuditId == id);
+            return specificaudit;
+        }
+
+        public async Task<IEnumerable<Finding>> GetFindings()
+        {
+            var findings = await _context.Findings.ToListAsync();
+            return findings;
+        }
+ 
+        public async Task<Finding> GetFinding(int id)
+        {
+            var specificfinding = await _context.Findings.FirstOrDefaultAsync(m => m.FindingId == id);
+            return specificfinding;
         }
 
 /*       public async Task<bool> UpdateScrumAsync(Scrum scrum){
@@ -219,6 +269,26 @@ namespace codeapp.API.Data
         {
             var responsibles = await _context.Responsibles.ToListAsync();
             return responsibles;
+        }
+
+        public async Task<IEnumerable<ScrumStatus>> GetScrumStatus()
+        {
+            var scrumstatus = await _context.ScrumStatuses.ToListAsync();
+            return scrumstatus;
+        }
+
+        public async Task<IEnumerable<AuditType>> GetAuditTypes()
+        {
+            var audittypes = await _context.AuditTypes.ToListAsync();
+            return audittypes;
+        }
+
+        public async Task<PhotoAudit> GetPhotoAudit(int id)
+        {
+            var photo = await _context.PhotoAudits.IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            return photo;
         }
 
     }

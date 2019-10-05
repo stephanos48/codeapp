@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Customer } from '../_models/customer';
 import { Scrum } from '../_models/scrum';
 import { map } from 'rxjs/operators';
+import { Ncr } from '../_models/ncr';
+import { Audit } from '../_models/audit';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,33 @@ export class GeneralService {
   baseUrl = environment.apiUrl;
 
 constructor(private http: HttpClient) { }
+/*
+getScrums(page?, itemsPerPage?, scrumParams?): Observable<PaginatedResult<Scrum[]>> {
+  const paginatedResult: PaginatedResult<Scrum[]> = new PaginatedResult<Scrum[]>();
 
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  if (scrumParams != null) {
+    params = params.append('scrumStatus', scrumParams.scrumStatus);
+  }
+
+  return this.http.get<Scrum[]>(this.baseUrl + 'scrums', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
+}
+*/
 getCustomers() {
   return this.http.get(this.baseUrl + 'customers/getCustomers');
 }
@@ -79,6 +107,50 @@ getCustomersPage(page?, itemsPerPage?) {
 
   getResponsibles() {
     return this.http.get(this.baseUrl + 'responsibles/getResponsibles');
+  }
+
+  getNcrs() {
+    return this.http.get(this.baseUrl + 'ncrs/getNcrs');
+  }
+
+  updateNcr(id: number, ncr: Ncr) {
+    return this.http.put(this.baseUrl + 'ncrs/' + id, ncr);
+  }
+
+  createNcr(ncr: Ncr) {
+    return this.http.post(this.baseUrl + 'ncrs/createNcr', ncr);
+  }
+
+  getNcr(id): Observable<Ncr> {
+    return this.http.get<Ncr>(this.baseUrl + 'ncrs/' + id);
+  }
+
+  deleteNcr(id: number, ncr: Ncr) {
+    return this.http.post(this.baseUrl + 'ncrs/' + id, ncr);
+  }
+
+  getAudits() {
+    return this.http.get(this.baseUrl + 'audit/getAudits');
+  }
+
+  updateAudit(id: number, audit: Audit) {
+    return this.http.put(this.baseUrl + 'audit/' + id, audit);
+  }
+
+  createAudit(audit: Audit) {
+    return this.http.post(this.baseUrl + 'audit/createAudit', audit);
+  }
+
+  getAudit(id): Observable<Audit> {
+    return this.http.get<Audit>(this.baseUrl + 'audit/' + id);
+  }
+
+  deleteAudit(id: number, audit: Audit) {
+    return this.http.post(this.baseUrl + 'audit/' + id, audit);
+  }
+
+  getAuditTypes() {
+    return this.http.get(this.baseUrl + 'auditTypes/getAuditTypes');
   }
 
 }

@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div *ngIf="!createMode">
+    <h2>NCRs</h2>
+    <a class="nav-link" [routerLink]="['/qualityhome']"><h4><i class="fa fa-arrow-left"></i></h4></a>
+    <div style="text-align: left">
+        <button class="btn btn-primary btn-md" (click)="createToggle()">Create</button>
+    </div>
+    <br>
+    <div class="row" style="text-align: left">
+      <table class="table" >
+        <tr>
+          <th style="width: 5%">NcrId</th>
+          <th style="width: 15%">DateCreated</th>
+          <th style="width: 15%">NcrNo</th>
+          <th style="width: 15%">PartNumber</th>
+          <th style="width: 25%">DefectDescription</th>
+          <th style="width: 5%">NcrStatus</th>
+          <th style="width: 15%">Notes</th>
+          <th style="width: 5%"></th>
+        </tr>
+        <tr *ngFor="let ncr of ncrs">
+          <td>{{ncr.ncrId}}</td>
+          <td>{{ncr.dateCreated}}</td>
+          <td>{{ncr.ncrNo}}</td>
+          <td>{{ncr.partNumber}}</td>
+          <td>{{ncr.defectDescription}}</td>
+          <td>{{ncr.ncrStatusId}}</td>
+          <td>{{ncr.notes}}</td>
+          <td><button class="btn btn-info" (click)="editNcrsModal(ncr)">Edit</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="createMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-ncr-create (cancelCreate)="cancelCreateMode($event)"></app-ncr-create>
+      </div>
+    </div>
+  </div>
+</div>

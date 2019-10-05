@@ -20,6 +20,13 @@ import { CustomerEditResolver } from './_resolvers/customer-edit.resolver';
 import { ScrumListComponent } from './scrums/scrum-list/scrum-list.component';
 import { ScrumComponent } from './scrums/scrum/scrum.component';
 import { PrimeComponent } from './prime/prime.component';
+import { QualityhomeComponent } from './deptartments/quality/qualityhome/qualityhome.component';
+import { NcrComponent } from './deptartments/quality/ncr/ncr/ncr.component';
+import { InternalauditComponent } from './deptartments/quality/internalaudit/internalaudit.component';
+import { InternalauditDetailComponent } from './deptartments/quality/internalaudit/internalaudit-detail/internalaudit-detail.component';
+import { AuditDetailResolver } from './_resolvers/audit-detail.resolver';
+import { InternalauditEditComponent } from './deptartments/quality/internalaudit/internalaudit-edit/internalaudit-edit.component';
+import { AuditEditResolver } from './_resolvers/audit-edit.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,6 +37,7 @@ export const appRoutes: Routes = [
         children: [
             { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
             { path: 'prime', component: PrimeComponent, data: {}},
+            { path: 'home', component: HomeComponent, data: {}},
             { path: 'members/:id', component: MemberDetailComponent,
                 resolve: { user: MemberDetailResolver }},
             { path: 'member/edit', component: MemberEditComponent,
@@ -43,6 +51,13 @@ export const appRoutes: Routes = [
             resolve: {customer: CustomerEditResolver}, canDeactivate: [PreventUnsavedChanges] },
             { path: 'scrum', component: ScrumComponent, data: {roles: ['Admin', 'Moderator']} },
             { path: 'scrumlist', component: ScrumListComponent, data: {roles: ['Admin', 'Moderator']} },
+            { path: 'qualityhome', component: QualityhomeComponent, data: {}},
+            { path: 'ncr', component: NcrComponent, data: {}},
+            { path: 'internalaudit', component: InternalauditComponent, data: {}},
+            { path: 'internalaudit/edit/:id', component: InternalauditEditComponent,
+            resolve: {audit: AuditEditResolver}, canDeactivate: [PreventUnsavedChanges]},
+            { path: 'audit/:id', component: InternalauditDetailComponent,
+            resolve: { audit: AuditDetailResolver }}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

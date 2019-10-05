@@ -6,35 +6,44 @@
 </div>
 <div class="modal-body">
   <form #scrumForm="ngForm" id="scrumForm">
-      <div class="form-group">
-        <input type="text" class="form-control" required name="createdby" [readOnly]="true" [(ngModel)]="scrum.createdBy" placeholder="Createdby">
-      </div>
-      
-      <div class="form-group">
-        <input type="text" class="form-control" required name="datecreated" [readOnly]="true" [value]="scrum.dateCreated | date" placeholder="Datecreated">
-      </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="createdby" [readOnly]="true" [(ngModel)]="scrum.createdBy" placeholder="Createdby">
+    </div>
+    
+    <div class="form-group">
+      <input type="text" class="form-control" required name="datecreated" [readOnly]="true" [value]="scrum.dateCreated | date" placeholder="Datecreated">
+    </div>
 
-      <div class="form-group">
-        <select class="form-control" required name="responsible" [(ngModel)]="scrum.responsibleId" placeholder="Responsible">
-          <option *ngFor="let responsible of responsibleList" value="{{responsible.responsibleId}}">{{responsible.employeeName}}</option>
-          </select>
-      </div>
+    <div class="form-group">
+      <select class="form-control" required name="responsible" [(ngModel)]="scrum.responsibleId" placeholder="Responsible">
+        <option *ngFor="let responsible of responsibleList" value="{{responsible.responsibleId}}">{{responsible.employeeName}}</option>
+        </select>
+    </div>
 
-      <div class="form-group">
-        <input type="text" class="form-control" required name="action" [(ngModel)]="scrum.action" placeholder="Action">
-      </div>
-      
-      <div class="form-group">
-        <input type="text" class="form-control" required name="duedate" [(ngModel)]="scrum.dueDate" placeholder="Duedate">
-      </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="action" [(ngModel)]="scrum.action" placeholder="Action">
+    </div>
+    
+    <div class="form-group">
+      <input type="text" class="form-control" required name="duedate" [(ngModel)]="scrum.dueDate" placeholder="Duedate">
+    </div>
 
-      <div class="form-group">
-        <input type="text" class="form-control" required name="completiondate" [(ngModel)]="scrum.completionDate" placeholder="Completiondate" >
-      </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="completiondate" [(ngModel)]="scrum.completionDate" placeholder="Completiondate" >
+    </div>
 
-      <div class="form-group">
-        <input type="text" class="form-control" required name="notes" [(ngModel)]="scrum.notes" placeholder="Notes">
-      </div>
+    <div class="form-group">
+        <select type="text" class="form-control" required name="closedstatus" [(ngModel)]="scrum.closedStatus" placeholder="Closedstatus">
+          <option value="1">NotClosed</option>
+          <option value="2">CompletedOnTime</option>
+          <option value="3">CompletedLate</option>
+          <option value="3">CompletedLateWrong</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" required name="notes" [(ngModel)]="scrum.notes" placeholder="Notes">
+    </div>
 
   </form>
 </div>

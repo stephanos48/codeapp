@@ -1,34 +1,70 @@
 <div class="container mt-5">
   <div *ngIf="!createMode">
-    <div style="text-align: left">
-    <button class="btn btn-primary btn-md"  (click)="createToggle()">Create</button>
+      <div class="row">
+        <div class="col-11 text-left">
+          <h2>Scrum</h2>
+          <a class="nav-link" [routerLink]="['/prime']"><h4><i class="fa fa-arrow-left"></i></h4></a>
+        </div>
+      </div>
+      <div style="text-align: left">
+          <button class="btn btn-primary btn-md"  (click)="createToggle()">Create</button>
+      </div>
+    <!--
+    <div class="container mt-3">
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadScrums()" novalidate>
+      
+        <div class="form-group px-2">
+          <label for="scrumStatus">Show: </label>
+          <select class="form-control ml-1" style="width: 130px" id="scrumStatus" 
+            [(ngModel)]="scrumParams.scrumStatus" name="scrumStatus">
+            <option *ngFor="let scrumStatus of statusList" [value]="scrumStatus.value"> 
+              {{scrumStatus.display}}
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
+        <button type="button" class="btn btn-info" (click)="resetFilters()" style="margin-left:10px">Reset Filter</button>
+         
+      </form>
     </div>
+    -->
     <br>
     <div class="row" style="text-align: left">
-      <table class="table">
+      <table datatable class="row-border hover">
+        <thead>
         <tr>
-          <th style="width: 5%">Scrum Id</th>
-          <th style="width: 15%">Created By</th>
-          <th style="width: 10%">Date Created</th>
-          <th style="width: 15%">Responsible</th>
-          <th style="width: 30%">Action</th>
-          <th style="width: 15%">Due Date</th>
-          <th style="width: 15%">Completion Date</th>
+          <th>Created</th>
+          <th>Responsible</th>
+          <th>Action</th>
+          <th>Due</th>
+          <th>Status</th>
+          <th>Completed</th>
+          <th>Notes</th>
+          <th></th>
+        </tr>
+        <!--<tr>
+          <th style="width: 10%">Created</th>
+          <th style="width: 10%">Responsible</th>
+          <th style="width: 25%">Action</th>
+          <th style="width: 10%">Due</th>
+          <th style="width: 10%">Status</th>
+          <th style="width: 10%">Completed</th>
           <th style="width: 20%">Notes</th>
           <th style="width: 5%"></th>
-        </tr>
+        </tr>-->
+      </thead>
+      <tbody>
         <tr *ngFor="let scrum of scrums">
-          <td>{{scrum.id}}</td>
-          <td>{{scrum.createdBy}}</td>
           <td>{{scrum.dateCreated | date}}</td>
           <td>{{scrum.responsible}}</td>
           <td>{{scrum.action}}</td>
           <td>{{scrum.dueDate | date}}</td>
+          <td>{{scrum.scrumStatus}}</td>
           <td>{{scrum.completionDate | date}}</td>
           <td>{{scrum.notes}}</td>
           <td><button class="btn btn-info" (click)="editScrumsModal(scrum)">Edit</button></td>
-
         </tr>
+      </tbody>
       </table>
     </div>
   </div>
@@ -40,4 +76,17 @@
       </div>
     </div>
   </div>
+
+<!--
+<div class="d-flex justify-content-center">
+  <pagination [boundaryLinks]="true" 
+              [totalItems]="pagination.totalItems"
+              [itemsPerPage]="pagination.itemsPerPage"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
 </div>
+
+</div>
+-->

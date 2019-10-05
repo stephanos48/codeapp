@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Audit: {{audit?.auditName}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #auditForm="ngForm" id="auditForm">
+        <div class="form-group">
+          <input type="text" class="form-control" required name="auditno" [(ngModel)]="audit.auditNo" placeholder="Auditno">
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" required name="audittype" [(ngModel)]="audit.auditTypeId" placeholder="Audittype">
+            <option *ngFor="let audittype of auditTypeList" value="{{audittype.auditTypeId}}">{{audittype.auditTypeName}}</option>
+          </select>
+        </div>
+      
+        <div class="form-group">
+          <input type="text" class="form-control" required name="auditname" [(ngModel)]="audit.auditName" placeholder="Auditname">
+        </div>
+        
+        <div class="form-group">
+          <input type="text" class="form-control" required name="auditscope" [(ngModel)]="audit.auditScope" placeholder="Auditscope">
+        </div>
+  
+        <div class="form-group">
+          <input type="text" class="form-control" required name="plannedauditstartdate" [(ngModel)]="audit.plannedAuditStartDate" placeholder="plannedAuditStartDate">
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" required name="plannedauditenddate" [(ngModel)]="audit.plannedAuditEndDate" placeholder="plannedAuditEndDate">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" required name="actualauditstartdate" [(ngModel)]="audit.actualAuditStartDate" placeholder="actualAuditStartDate">
+          </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" required name="actualauditenddate" [(ngModel)]="audit.actualAuditEndDate" placeholder="actualAuditEndDate">
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" required name="auditors" [(ngModel)]="audit.auditors" placeholder="Auditors">
+        </div>
+        
+        <div class="form-group">
+          <input type="text" class="form-control" required name="auditReason" [(ngModel)]="audit.auditReason" placeholder="Auditreason">
+        </div>
+  
+        <div class="form-group">
+          <input type="text" class="form-control" required name="auditSummary" [(ngModel)]="audit.auditSummary" placeholder="Auditsummary">
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" required name="notes" [(ngModel)]="audit.notes" placeholder="Notes">
+        </div>
+  
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="updateAudit()" form="auditForm">Submit</button>
+  </div>

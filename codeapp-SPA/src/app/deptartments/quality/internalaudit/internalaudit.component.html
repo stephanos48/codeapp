@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <div *ngIf="!createMode">
+  <div class="row">
+      <div class="col-11 text-left">
+        <h2>Internal Audits</h2>
+        <a class="nav-link" [routerLink]="['/qualityhome']"><h4><i class="fa fa-arrow-left"></i></h4></a>
+      </div>
+    </div>
+    <div style="text-align: left">
+    <button class="btn btn-primary btn-md" (click)="createToggle()">Create</button>
+    </div>
+    <br>
+    <div class="row" style="text-align: left">
+      <table class="table">
+        <tr>
+          <th style="width: 5%">Audit Id</th>
+          <th style="width: 10%">Audit No</th>
+          <th style="width: 20%">Audit Name</th>
+          <th style="width: 20%">Plan Start Date</th>
+          <th style="width: 20%">Actual Start Date</th>
+          <th style="width: 20%">Notes</th>
+          <th style="width: 5%"></th>
+          <th style="width: 5%"></th>
+        </tr>
+        <tr *ngFor="let audit of audits">
+          <td>{{audit.auditId}}</td>
+          <td>{{audit.auditNo}}</td>
+          <td>{{audit.auditName}}</td>
+          <td>{{audit.plannedAuditStartDate | date}}</td>
+          <td>{{audit.actualAuditStartDate | date}}</td>
+          <td>{{audit.notes}}</td>
+          <td><button class="btn btn-primary" 
+            [routerLink]="['/internalaudit/edit', audit.auditId]"><i class="fa fa-book"></i></button></td>
+          <td><button class="btn btn-primary"
+            [routerLink]="['/audit/', audit.auditId]"><i class="fa fa-info-circle"></i></button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="createMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-internalaudit-create (cancelCreate)="cancelCreateMode($event)"></app-internalaudit-create>
+      </div>
+    </div>
+  </div>
+</div>
+

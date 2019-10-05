@@ -1,0 +1,60 @@
+<form #createForm="ngForm" (ngSubmit)="create()">
+    <h2 class="text-center text-primary"> Create a new Audit</h2>
+    <hr>
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="auditNo" [(ngModel)]="model.auditNo" placeholder="auditNo">
+    </div>
+   
+    <div class="form-group">
+        <select name="auditTypeId" #AuditTypeId="ngModel" [(ngModel)]="model.auditTypeId" class="form-control">
+          <option *ngFor="let audittype of auditTypeList" value="{{audittype.auditTypeId}}">{{audittype.auditTypeName}}</option>
+        </select>
+    </div>
+     
+    <div class="form-group">
+      <input type="text" class="form-control" required name="auditName" [(ngModel)]="model.auditName" placeholder="auditName">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="auditScope" [(ngModel)]="model.auditScope" placeholder="auditScope">
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" required name="plannedAuditStartDate" [(ngModel)]="model.plannedAuditStartDate" placeholder="plannedAuditStartDate" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="plannedAuditEndDate" [(ngModel)]="model.plannedAuditEndDate" placeholder="plannedAuditEndDate" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+  
+    <div class="form-group">
+        <input type="text" class="form-control" required name="actualAuditStartDate" [(ngModel)]="model.actualAuditStartDate" placeholder="actualAuditStartDate" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="actualAudityEndDate" [(ngModel)]="model.actualAuditEndDate" placeholder="actualAuditEndDate" bsDatepicker [bsConfig]="bsConfig">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="auditors" [(ngModel)]="model.auditors" placeholder="auditors">
+    </div>  
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="auditReason" [(ngModel)]="model.auditReason" placeholder="auditReason">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" required name="auditSummary" [(ngModel)]="model.auditSummary" placeholder="auditSummary">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" required name="notes" [(ngModel)]="model.notes" placeholder="Notes">
+    </div>
+  
+    <div class="form-group text-center">
+      <button class="btn btn-success" type="submit">Create</button>
+      <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    </div>
+  
+  </form>

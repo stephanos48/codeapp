@@ -15,9 +15,59 @@ namespace codeapp.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("codeapp.API.Models.Audit", b =>
+                {
+                    b.Property<int>("AuditId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ActualAuditEndDate");
+
+                    b.Property<DateTime>("ActualAuditStartDate");
+
+                    b.Property<string>("AuditName");
+
+                    b.Property<string>("AuditNo");
+
+                    b.Property<string>("AuditReason");
+
+                    b.Property<string>("AuditScope");
+
+                    b.Property<string>("AuditSummary");
+
+                    b.Property<int>("AuditTypeId");
+
+                    b.Property<string>("Auditors");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<DateTime>("PlannedAuditEndDate");
+
+                    b.Property<DateTime>("PlannedAuditStartDate");
+
+                    b.HasKey("AuditId");
+
+                    b.HasIndex("AuditTypeId");
+
+                    b.ToTable("Audits");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.AuditType", b =>
+                {
+                    b.Property<int>("AuditTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AuditTypeName");
+
+                    b.HasKey("AuditTypeId");
+
+                    b.ToTable("AuditTypes");
+                });
 
             modelBuilder.Entity("codeapp.API.Models.Customer", b =>
                 {
@@ -54,6 +104,73 @@ namespace codeapp.API.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.CustomerDivision", b =>
+                {
+                    b.Property<int>("CustomerDivisionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CustomerDivisionName");
+
+                    b.HasKey("CustomerDivisionId");
+
+                    b.ToTable("CustomerDivisions");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Disposition", b =>
+                {
+                    b.Property<int>("DispositionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DispositionName");
+
+                    b.HasKey("DispositionId");
+
+                    b.ToTable("Dispositions");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Finding", b =>
+                {
+                    b.Property<int>("FindingId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AuditId")
+                        .IsRequired();
+
+                    b.Property<string>("Auditor");
+
+                    b.Property<string>("FindingDetails");
+
+                    b.Property<int>("FindingTypeId");
+
+                    b.Property<string>("IsoClauseProcess");
+
+                    b.Property<string>("Notes");
+
+                    b.HasKey("FindingId");
+
+                    b.HasIndex("AuditId");
+
+                    b.HasIndex("FindingTypeId");
+
+                    b.ToTable("Findings");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.FindingType", b =>
+                {
+                    b.Property<int>("FindingTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FindingTypeName");
+
+                    b.HasKey("FindingTypeId");
+
+                    b.ToTable("FindingTypes");
                 });
 
             modelBuilder.Entity("codeapp.API.Models.Like", b =>
@@ -100,6 +217,142 @@ namespace codeapp.API.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("codeapp.API.Models.MlsDivision", b =>
+                {
+                    b.Property<int>("MlsDivisionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MlsDivisionName");
+
+                    b.HasKey("MlsDivisionId");
+
+                    b.ToTable("MlsDivision");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Ncr", b =>
+                {
+                    b.Property<int>("NcrId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CompletionDate");
+
+                    b.Property<int>("CustomerDivisionId");
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<string>("DefectCode");
+
+                    b.Property<string>("DefectDescription");
+
+                    b.Property<string>("DispositionBy");
+
+                    b.Property<DateTime>("DispositionDate");
+
+                    b.Property<int>("DispositionId");
+
+                    b.Property<int>("MlsDivisionId");
+
+                    b.Property<string>("NcrNo");
+
+                    b.Property<int>("NcrStatusId");
+
+                    b.Property<int>("NcrTypeId");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("PartCost");
+
+                    b.Property<string>("PartDescription");
+
+                    b.Property<string>("PartNumber");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<string>("ReworkCompletedBy");
+
+                    b.Property<string>("ReworkHrs");
+
+                    b.Property<string>("ReworkNo");
+
+                    b.Property<string>("ReworkNotes");
+
+                    b.Property<string>("ReworkPartsScrapped");
+
+                    b.Property<string>("ReworkPartsUsed");
+
+                    b.Property<int>("ReworkQty");
+
+                    b.Property<string>("ReworkStatus");
+
+                    b.Property<string>("ScarpApprovedBy");
+
+                    b.Property<string>("ScarppedBy");
+
+                    b.Property<DateTime>("ScrapApprovalDate");
+
+                    b.Property<DateTime>("ScrapDate");
+
+                    b.Property<string>("ScrapNo");
+
+                    b.Property<string>("ScrapNotes");
+
+                    b.Property<int>("ScrapQty");
+
+                    b.Property<string>("ScrapStatus");
+
+                    b.Property<string>("SerialNumber");
+
+                    b.Property<int>("SupplierId");
+
+                    b.HasKey("NcrId");
+
+                    b.HasIndex("CustomerDivisionId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("DispositionId");
+
+                    b.HasIndex("MlsDivisionId");
+
+                    b.HasIndex("NcrStatusId");
+
+                    b.HasIndex("NcrTypeId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("Ncrs");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.NcrStatus", b =>
+                {
+                    b.Property<int>("NcrStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NcrStatusName");
+
+                    b.HasKey("NcrStatusId");
+
+                    b.ToTable("NcrStatuses");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.NcrType", b =>
+                {
+                    b.Property<int>("NcrTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NcrTypeName");
+
+                    b.HasKey("NcrTypeId");
+
+                    b.ToTable("NcrTypes");
+                });
+
             modelBuilder.Entity("codeapp.API.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -125,6 +378,33 @@ namespace codeapp.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.PhotoAudit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuditId");
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsApproved");
+
+                    b.Property<bool>("IsMain");
+
+                    b.Property<string>("PublicId");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuditId");
+
+                    b.ToTable("PhotoAudits");
                 });
 
             modelBuilder.Entity("codeapp.API.Models.Responsible", b =>
@@ -177,6 +457,8 @@ namespace codeapp.API.Migrations
 
                     b.Property<string>("Action");
 
+                    b.Property<string>("ClosedStatus");
+
                     b.Property<DateTime>("CompletionDate");
 
                     b.Property<string>("CreatedBy");
@@ -189,11 +471,71 @@ namespace codeapp.API.Migrations
 
                     b.Property<int>("ResponsibleId");
 
+                    b.Property<string>("ScrumStatus");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ResponsibleId");
 
                     b.ToTable("Scrums");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.ScrumStatus", b =>
+                {
+                    b.Property<int>("ScrumStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ScrumStatusName");
+
+                    b.HasKey("ScrumStatusId");
+
+                    b.ToTable("ScrumStatuses");
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Supplier", b =>
+                {
+                    b.Property<int>("SupplierId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("AnnualRev");
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("DetailCategory");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Fax");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("State");
+
+                    b.Property<string>("SubCategory");
+
+                    b.Property<string>("SupplierName");
+
+                    b.Property<string>("SupplierNo");
+
+                    b.Property<string>("SupplierType");
+
+                    b.Property<string>("Website");
+
+                    b.Property<string>("ZipCode");
+
+                    b.HasKey("SupplierId");
+
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("codeapp.API.Models.User", b =>
@@ -364,6 +706,27 @@ namespace codeapp.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("codeapp.API.Models.Audit", b =>
+                {
+                    b.HasOne("codeapp.API.Models.AuditType", "AuditType")
+                        .WithMany()
+                        .HasForeignKey("AuditTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.Finding", b =>
+                {
+                    b.HasOne("codeapp.API.Models.Audit", "Audit")
+                        .WithMany("Findings")
+                        .HasForeignKey("AuditId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("codeapp.API.Models.FindingType", "FindingType")
+                        .WithMany()
+                        .HasForeignKey("FindingTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("codeapp.API.Models.Like", b =>
                 {
                     b.HasOne("codeapp.API.Models.User", "Likee")
@@ -390,11 +753,57 @@ namespace codeapp.API.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("codeapp.API.Models.Ncr", b =>
+                {
+                    b.HasOne("codeapp.API.Models.CustomerDivision", "CustomerDivision")
+                        .WithMany()
+                        .HasForeignKey("CustomerDivisionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("codeapp.API.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("codeapp.API.Models.Disposition", "Disposition")
+                        .WithMany()
+                        .HasForeignKey("DispositionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("codeapp.API.Models.MlsDivision", "MlsDivision")
+                        .WithMany()
+                        .HasForeignKey("MlsDivisionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("codeapp.API.Models.NcrStatus", "NcrStatus")
+                        .WithMany()
+                        .HasForeignKey("NcrStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("codeapp.API.Models.NcrType", "NcrType")
+                        .WithMany()
+                        .HasForeignKey("NcrTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("codeapp.API.Models.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("codeapp.API.Models.Photo", b =>
                 {
                     b.HasOne("codeapp.API.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("codeapp.API.Models.PhotoAudit", b =>
+                {
+                    b.HasOne("codeapp.API.Models.Audit", "Audit")
+                        .WithMany("PhotoAudits")
+                        .HasForeignKey("AuditId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

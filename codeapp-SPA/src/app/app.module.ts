@@ -8,6 +8,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -53,6 +54,27 @@ import { ScrumListComponent } from './scrums/scrum-list/scrum-list.component';
 import { ScrumCreateComponent } from './scrums/scrum-create/scrum-create.component';
 import { ScrumModalComponent } from './scrums/scrum-modal/scrum-modal.component';
 import { PrimeComponent } from './prime/prime.component';
+import { QualityhomeComponent } from './deptartments/quality/qualityhome/qualityhome.component';
+import { NcrComponent } from './deptartments/quality/ncr/ncr/ncr.component';
+import { NcrModalComponent } from './deptartments/quality/ncr/ncr-modal/ncr-modal.component';
+import { NcrCreateComponent } from './deptartments/quality/ncr/ncr-create/ncr-create.component';
+import { InternalauditComponent } from './deptartments/quality/internalaudit/internalaudit.component';
+import { InternalauditCreateComponent } from './deptartments/quality/internalaudit/internalaudit-create/internalaudit-create.component';
+import { InternalauditEditComponent } from './deptartments/quality/internalaudit/internalaudit-edit/internalaudit-edit.component';
+import { InternalauditModalComponent } from './deptartments/quality/internalaudit/internalaudit-modal/internalaudit-modal.component';
+import { InternalauditDetailComponent } from './deptartments/quality/internalaudit/internalaudit-detail/internalaudit-detail.component';
+import { AuditDetailResolver } from './_resolvers/audit-detail.resolver';
+import { EngineeringComponent } from './deptartments/engineering/engineering.component';
+import { HrComponent } from './deptartments/hr/hr.component';
+import { InfotechComponent } from './deptartments/infotech/infotech.component';
+import { LogisticsComponent } from './deptartments/logistics/logistics.component';
+import { OpsComponent } from './deptartments/ops/ops.component';
+import { IncinspectionComponent } from './deptartments/quality/incinspection/incinspection.component';
+import { SalesComponent } from './deptartments/sales/sales.component';
+import { SupplychainComponent } from './deptartments/supplychain/supplychain.component';
+import { AuditphotoEditorComponent } from './deptartments/quality/internalaudit/auditphoto-editor/auditphoto-editor.component';
+import { AuditEditResolver } from './_resolvers/audit-edit.resolver';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -88,7 +110,25 @@ export function tokenGetter() {
       ScrumListComponent,
       ScrumCreateComponent,
       ScrumModalComponent,
-      PrimeComponent
+      PrimeComponent,
+      QualityhomeComponent,
+      NcrComponent,
+      NcrModalComponent,
+      NcrCreateComponent,
+      InternalauditComponent,
+      InternalauditCreateComponent,
+      InternalauditEditComponent,
+      InternalauditModalComponent,
+      InternalauditDetailComponent,
+      EngineeringComponent,
+      HrComponent,
+      InfotechComponent,
+      LogisticsComponent,
+      OpsComponent,
+      IncinspectionComponent,
+      SalesComponent,
+      SupplychainComponent,
+      AuditphotoEditorComponent
    ],
    imports: [
       BrowserModule,
@@ -104,13 +144,15 @@ export function tokenGetter() {
       ModalModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule,
+      DataTablesModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      BrowserAnimationsModule
    ],
    providers: [
       AuthService,
@@ -128,13 +170,15 @@ export function tokenGetter() {
       AdminService,
       GeneralService,
       CustomerEditResolver,
-
+      AuditDetailResolver,
+      AuditEditResolver,
    ],
    entryComponents:
    [
       RolesModalComponent,
       CustomerModalComponent,
-      ScrumModalComponent
+      ScrumModalComponent,
+      InternalauditModalComponent
    ],
    bootstrap: [
       AppComponent

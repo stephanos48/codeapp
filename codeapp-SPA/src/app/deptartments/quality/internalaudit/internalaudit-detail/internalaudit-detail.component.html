@@ -1,0 +1,75 @@
+<div class="container mt-4">
+  <div class="row">
+  <div class="col-11 text-left">
+    <h2>Internal Audit Details</h2>
+    <a class="nav-link" [routerLink]="['/internalaudit']"><h4><i class="fa fa-arrow-left"></i></h4></a>
+    <h3>Audit {{audit.auditNo}} Details</h3>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+
+        <div class="card-body">
+          <div>
+            <strong>Audit Number:</strong>
+            <p>{{audit.auditNo}}</p>
+          </div>
+          <div>
+            <strong>Audit Name:</strong>
+            <p>{{audit.auditName}}</p>
+          </div>
+          <div>
+            <strong>Planned Audit Start Date:</strong>
+            <p>{{audit.plannedAuditStartDate | date}}</p>
+          </div>
+          <div>
+            <strong>Planned Audit End Date:</strong>
+            <p>{{audit.plannedAuditEndDate | date}}</p>
+          </div>
+          <div>
+            <strong>Actual Audit Start Date:</strong>
+            <p>{{audit.actualAuditStartDate | date}}</p>
+          </div>
+          <div>
+            <strong>Actual Audit End Date:</strong>
+            <p>{{audit.actualAuditEndDate | date}}</p>
+          </div>
+
+          <div class="card-footer">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="audit-tabset" #auditTabs>
+          <tab heading="About {{audit?.auditNo}}">
+              <h4>Audit Type</h4>
+              <p>{{audit.auditTypeId}}</p>
+              <h4>Audit Reason</h4>
+              <p>{{audit.auditReason}}</p>
+              <h4>Audit Scope</h4>
+              <p>{{audit.auditScope}}</p>
+          </tab>
+          <tab heading="Auditors">
+              <p>{{audit.auditors}}</p>
+          </tab>
+          <tab heading="Summary">
+              <p>{{audit.auditSummary}}</p>
+          </tab>
+          <tab heading="Notes">
+              <p>{{audit.notes}}</p>
+          </tab>
+          <tab heading="Files">
+              <ngx-gallery [options] = "galleryOptions" [images] = "galleryImages"></ngx-gallery>
+          </tab>
+          <tab heading="Findings">
+              
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
