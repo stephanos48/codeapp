@@ -33,7 +33,7 @@ namespace codeapp.API.Data
          Task<Finding> GetFinding(int id);
          Task<PhotoAudit> GetPhotoAudit(int id);
          Task<IEnumerable<AuditType>> GetAuditTypes();
-        Task<IEnumerable<ScrumStatus>> GetScrumStatus();
+         Task<IEnumerable<ScrumStatus>> GetScrumStatus();
 
          Task<bool> SaveChangesAsync();
          

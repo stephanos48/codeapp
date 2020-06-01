@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef, OnDestroy, AfterViewInit,
+  Inject, ElementRef } from '@angular/core';
 import { GeneralService } from 'src/app/_services/general.service';
-import { HttpClient, } from '@angular/common/http';
-import { HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,16 +13,27 @@ import { ScrumModalComponent } from '../scrum-modal/scrum-modal.component';
 import { Responsible } from 'src/app/_models/responsible';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MatPaginator, MatTableDataSource, MatSort, MatTable, MatIcon, MatCheckbox, MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SelectionModel } from '@angular/cdk/collections';
+import { DialogBoxComponent } from 'src/app//dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-scrum',
   templateUrl: './scrum.component.html',
   styleUrls: ['./scrum.component.css']
 })
-export class ScrumComponent implements OnInit, OnDestroy {
+export class ScrumComponent implements OnInit, AfterViewInit {
   @Output() cancelCreate = new EventEmitter();
-  baseUrl = environment.apiUrl;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+  @ViewChild('filter', { static: true }) filter: ElementRef;
+
+  displayedColumns: string [] = [ 'Created', 'Responsible', 'Action', 'Due', 'Status', 'Completed', 'Notes', 'Action' ];
   scrums: Scrum[];
+  dataSource = new MatTableDataSource();
+  baseUrl = environment.apiUrl;
   scrum: Scrum = JSON.parse(localStorage.getItem('scrum'));
   createForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -31,13 +42,15 @@ export class ScrumComponent implements OnInit, OnDestroy {
   pagination: Pagination;
   bsModalRef: BsModalRef;
   ResponsibleList: Responsible [];
+  isScrumDataLoaded: boolean;
   statusList = [{value: 'new', display: 'New'}, {value: 'inprocess', display: 'InProcess'}, {value: 'late', display: 'Late'}];
-  dtOptions: DataTables.Settings = {};
-  dataTable: any;
-  dtTrigger: Subject<any> = new Subject<any>();
+  // dtOptions: DataTables.Settings = {};
+  // dataTable: any;
+  // dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(private generalService: GeneralService, private http: HttpClient, private fb: FormBuilder,
-    private alertify: AlertifyService, private route: ActivatedRoute, private modalService: BsModalService) { }
+    private alertify: AlertifyService, private route: ActivatedRoute, private modalService: BsModalService,
+    public dialog: MatDialog) {}
 
   ngOnInit(): void {
     /*this.route.data.subscribe(data => {
@@ -47,6 +60,8 @@ export class ScrumComponent implements OnInit, OnDestroy {
 
     this.scrumParams.scrumStatus = this.scrum.scrumStatus === 'new' ? 'late' : 'new';
 */
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.getScrums();
 
 /*
@@ -56,7 +71,7 @@ export class ScrumComponent implements OnInit, OnDestroy {
     // Initiate
     const table: any = $('table');
     this.dataTable = table.DataTable();
-*/
+*/ /*
     this.bsConfig = {
       containerClass: 'theme-red'
     };
@@ -66,14 +81,18 @@ export class ScrumComponent implements OnInit, OnDestroy {
       pageLength: 50
     };
 
-    this.http.get('data/data.json')
+    this.http.get('baseUrl/scrum/getScrums')
       .pipe(map(this.extractData))
       .subscribe(scrums => {
         this.scrums = scrums;
         this.dtTrigger.next();
-      });
+      }); */
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+  }
+/*
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -82,7 +101,7 @@ export class ScrumComponent implements OnInit, OnDestroy {
     const body = res.json();
     return body.data || {};
   }
-
+*/
 /*
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
@@ -108,12 +127,48 @@ export class ScrumComponent implements OnInit, OnDestroy {
       }
     );
   }*/
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+/*
+  openDialog(action, obj) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '250px',
+      data: obj
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event === 'Update') {
+        this.updateRowData(result.data);
+      } else if (result.event === 'Delete') {
+        this.deleteRowData(result.data);
+      }
+    });
+  }
+
+  updateRowData(row_obj) {
+    this.dataSource = this.dataSource.filter((value, key) => {
+      if (value.id === row_obj.id) {
+        value.name = row_obj.name;
+      }
+      return true;
+    });
+  }
+
+  deleteRowData(row_obj) {
+    this.dataSource = this.dataSource.filter((value, key) => {
+      return value.id !== row_obj.id;
+    });
+  }
+*/
   getScrums() {
     this.generalService.getScrums().subscribe((scrums: Scrum[]) => {
       this.generalService.getResponsibles().subscribe((Response1: Responsible[]) => {
         this.ResponsibleList = Response1;
+        this.isScrumDataLoaded = true;
         this.scrums = this.formatData(scrums);
+        this.dataSource.data = this.scrums;
       });
          // this.scrums = scrums;
     }, error => {

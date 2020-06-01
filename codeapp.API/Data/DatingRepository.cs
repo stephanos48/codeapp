@@ -244,8 +244,10 @@ namespace codeapp.API.Data
  
         public async Task<Audit> GetAudit(int id)
         {
-            var specificaudit = await _context.Audits.FirstOrDefaultAsync(m => m.AuditId == id);
-            return specificaudit;
+            var query = _context.Audits.Include(p => p.PhotoAudits).AsQueryable();
+
+            var audit = await query.FirstOrDefaultAsync(u => u.AuditId == id);
+            return audit;
         }
 
         public async Task<IEnumerable<Finding>> GetFindings()

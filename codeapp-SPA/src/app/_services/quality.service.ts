@@ -11,9 +11,10 @@ import { Finding } from '../_models/finding';
 })
 export class QualityService {
   baseUrl = environment.apiUrl;
+  audit: any;
+  currentAudit: Audit;
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
   currentPhotoUrl = this.photoUrl.asObservable();
-  currentAudit: Audit;
 
 constructor(private http: HttpClient) { }
 
@@ -62,7 +63,7 @@ deleteAudit(id: number, audit: Audit) {
 }
 
 getAuditTypes() {
-  return this.http.get(this.baseUrl + 'auditTypes/getAuditTypes');
+  return this.http.get(this.baseUrl + 'AuditTypes/getAuditTypes');
 }
 
 getFindings() {

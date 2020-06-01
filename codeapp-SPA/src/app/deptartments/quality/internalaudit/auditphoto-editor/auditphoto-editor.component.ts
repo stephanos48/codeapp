@@ -32,8 +32,8 @@ export class AuditphotoEditorComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'audit/' + this.qualityService.currentAudit.auditId + '/photoaudits',
-      authToken: 'Bearer ' + localStorage.getItem('token'),
+      url: this.baseUrl + 'audit/' + this.qualityService.audit.auditId + '/photoaudits',
+      // authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],
       removeAfterUpload: true,

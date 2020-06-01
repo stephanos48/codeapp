@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./customer-edit.component.css']
 })
 export class CustomerEditComponent implements OnInit {
-  @ViewChild('editForm') editForm: NgForm;
+  @ViewChild('editForm', { static: true }) editForm: NgForm;
   customer: Customer;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {

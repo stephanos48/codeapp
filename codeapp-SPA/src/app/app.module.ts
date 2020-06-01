@@ -1,5 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule } from 'ngx-bootstrap';
@@ -9,6 +11,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { DataTablesModule } from 'angular-datatables';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -74,10 +77,18 @@ import { SalesComponent } from './deptartments/sales/sales.component';
 import { SupplychainComponent } from './deptartments/supplychain/supplychain.component';
 import { AuditphotoEditorComponent } from './deptartments/quality/internalaudit/auditphoto-editor/auditphoto-editor.component';
 import { AuditEditResolver } from './_resolvers/audit-edit.resolver';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+
 
 export function tokenGetter() {
     return localStorage.getItem('token');
+}
+
+export class CustomHammerConfig extends HammerGestureConfig {
+   overrides = {
+      pinch: { enable: false },
+      rotate: { enable: false }
+   };
 }
 
 @NgModule({
@@ -128,10 +139,13 @@ export function tokenGetter() {
       IncinspectionComponent,
       SalesComponent,
       SupplychainComponent,
-      AuditphotoEditorComponent
+      AuditphotoEditorComponent,
+      DialogBoxComponent
+
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
@@ -140,11 +154,12 @@ export function tokenGetter() {
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
       ButtonsModule.forRoot(),
-      RouterModule.forRoot(appRoutes, {useHash: true}),
+      RouterModule.forRoot(appRoutes, { useHash: true }),
       ModalModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule,
       DataTablesModule,
+      MaterialModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
@@ -152,7 +167,7 @@ export function tokenGetter() {
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       }),
-      BrowserAnimationsModule
+      ToastrModule.forRoot()
    ],
    providers: [
       AuthService,
@@ -172,13 +187,15 @@ export function tokenGetter() {
       CustomerEditResolver,
       AuditDetailResolver,
       AuditEditResolver,
+      { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
    entryComponents:
    [
       RolesModalComponent,
       CustomerModalComponent,
       ScrumModalComponent,
-      InternalauditModalComponent
+      InternalauditModalComponent,
+      DialogBoxComponent
    ],
    bootstrap: [
       AppComponent

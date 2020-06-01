@@ -13,7 +13,7 @@ import { AuditType } from 'src/app/_models/audittype';
   styleUrls: ['./internalaudit-edit.component.css']
 })
 export class InternalauditEditComponent implements OnInit {
-  @ViewChild('editForm') editForm: NgForm;
+  @ViewChild('editForm', { static: true }) editForm: NgForm;
   audit: Audit;
   photoUrl: string;
   bsConfig: Partial<BsDatepickerConfig>;

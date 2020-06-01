@@ -57,6 +57,7 @@ namespace codeapp.API.Helpers
             CreateMap<FindingForCreationDto, Finding>();
             CreateMap<FindingForReturnDto, Finding>().ReverseMap();
             CreateMap<FindingForUpdateDto, Finding>();
+            CreateMap<AuditTypeForReturnDto, AuditType>().ReverseMap();
 
         }
     }

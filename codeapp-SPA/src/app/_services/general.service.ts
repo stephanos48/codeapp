@@ -8,12 +8,17 @@ import { Scrum } from '../_models/scrum';
 import { map } from 'rxjs/operators';
 import { Ncr } from '../_models/ncr';
 import { Audit } from '../_models/audit';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Division } from '../_models/division';
+import { CustomerDivision } from '../_models/customerdivision';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralService {
   baseUrl = environment.apiUrl;
+  formData: Customer;
+  customerDivisions: CustomerDivision[];
 
 constructor(private http: HttpClient) { }
 /*
@@ -43,8 +48,43 @@ getScrums(page?, itemsPerPage?, scrumParams?): Observable<PaginatedResult<Scrum[
     );
 }
 */
+
+Form: FormGroup = new FormGroup({
+  $key: new FormControl(null),
+  dateCreated: new FormControl(''),
+  responsibleId: new FormControl(''),
+  action: new FormControl(''),
+  dueDate: new FormControl(''),
+  scrumStatus: new FormControl(''),
+  dateCompleted: new FormControl(''),
+  notes: new FormControl('')
+});
+
+/*
+form: FormGroup = new FormGroup ({
+  $key: new FormControl(null),
+  created: new FormControl(''),
+  customerName: new FormControl('', Validators.required),
+  product: new FormControl(''),
+  union: new FormControl(false),
+  annualRevenue: new FormControl(''),
+  companyStart: new FormControl(''),
+  address: new FormControl(''),
+  city: new FormControl(''),
+  country: new FormControl(''),
+  phoneNo: new FormControl(''),
+  email: new FormControl(''),
+  website: new FormControl(''),
+  notes: new FormControl('')
+});
+*/
+
 getCustomers() {
   return this.http.get(this.baseUrl + 'customers/getCustomers');
+}
+
+getCustomers1() {
+  return this.http.get(this.baseUrl + 'customers/getCustomers').toPromise();
 }
 
 getCustomersPage(page?, itemsPerPage?) {
@@ -79,6 +119,10 @@ getCustomersPage(page?, itemsPerPage?) {
 
   getCustomer(id): Observable<Customer> {
     return this.http.get<Customer>(this.baseUrl + 'customers/' + id);
+  }
+
+  deleteCustomer1(id: number, customer: Customer) {
+    return this.http.post(this.baseUrl + 'customers/' + id, customer).toPromise();
   }
 
   deleteCustomer(id: number, customer: Customer) {

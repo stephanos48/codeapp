@@ -45,6 +45,7 @@ export const appRoutes: Routes = [
             { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver} },
             { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver} },
             { path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']} },
+            { path: 'customer1/customer', component: CustomerComponent, data: {roles: ['Admin', 'Moderator']} },
             { path: 'customer', component: CustomerComponent, data: {roles: ['Admin', 'Moderator']} },
             { path: 'customerlist', component: CustomerListComponent, data: {roles: ['Admin', 'Moderator']} },
             { path: 'customer/edit', component: CustomerEditComponent,

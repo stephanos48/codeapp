@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./internalaudit-detail.component.css']
 })
 export class InternalauditDetailComponent implements OnInit {
-  @ViewChild('auditTabs') auditTabs: TabsetComponent;
+  @ViewChild('auditTabs', { static: true }) auditTabs: TabsetComponent;
   audit: Audit;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];

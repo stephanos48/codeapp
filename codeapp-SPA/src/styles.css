@@ -5,6 +5,7 @@
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 
 .tab-panel {
     border: 1px solid #ddd;
@@ -16,39 +17,32 @@
     border-bottom: 4px solid #fbcdcf;
   }
   
-  .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
-    border: 0;
-    background: none !important;
-    color: #333333;
+  .fill-remaining-space {
+    flex: 1 1 auto;
   }
-  
-  .member-tabset > .nav-tabs > li.open > a > i, .member-tabset > .nav-tabs > li:hover > a > i {
-    color: #a6a6a6;
-  }
-  
-  .member-tabset > .nav-tabs > li.open .dropdown-menu, .member-tabset > .nav-tabs > li:hover .dropdown-menu {
-    margin-top: 0px;
-  }
-  
-  .member-tabset > .nav-tabs > li.active {
-    border-bottom: 4px solid #E95420;
-    position: relative;
-  }
-  
-  .member-tabset > .nav-tabs > li.active > a {
-    border: 0 !important;
-    color: #333333;
-  }
-  
-  .member-tabset > .nav-tabs > li.active > a > i {
-    color: #404040;
-  }
-  
-  .member-tabset > .tab-content {
-    margin-top: -3px;
-    background-color: #fff;
-    border: 0;
-    border-top: 1px solid #eee;
-    padding: 15px 0;
-  }
+
+/* div.container{
+  margin: 0px 40px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+form.normal-form{
+  margin: 10 px;
+}
+
+.controles-container{
+    width: 100%;
+    padding: 5%;
+}
+
+.controles-container > * {
+  width: 100%
+} */
+
 body { margin: 0; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
